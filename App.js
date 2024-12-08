@@ -6,6 +6,7 @@ const App = express();
 
 connectDB();
 
+App.use(express.json())
 App.use('/api/rooms', roomsRoute)
 
 //starting backend

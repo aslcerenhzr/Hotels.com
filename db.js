@@ -5,7 +5,7 @@ var mongoURL = 'mongodb+srv://user:user123@cluster0.m1tf4.mongodb.net/mern-rooms
 
 const connectDB = () => {
     mongoose.connect(mongoURL, {
-        useUnifiedTopology: true, useNewUrlParser: true, ssl: true
+        useUnifiedTopology: true, useNewUrlParser: true,  tlsAllowInvalidCertificates: true, ssl: true
     });
 
     var connection = mongoose.connection
