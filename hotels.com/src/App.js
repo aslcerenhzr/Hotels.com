@@ -6,6 +6,8 @@ import './components/Room.css';
 import {BrowserRouter, Route, Routes, Link} from 'react-router-dom'
 import HomeScreen from './screens/HomeScreen';
 import BookingScreen from './screens/BookingScreen';
+import RegisterScreen from './screens/RegisterScreen';
+import LoginScreen from './screens/LoginScreen';
 
 function App() {
   return (
@@ -17,6 +19,8 @@ function App() {
       </Routes>
       <Routes>
         <Route path='/book/:roomid' exact Component={BookingScreen}/>
+        <Route path='/register' exact Component={RegisterScreen}/>
+        <Route path='/login' exact Component={LoginScreen}/>
       </Routes>
       
       </BrowserRouter>

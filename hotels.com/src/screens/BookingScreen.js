@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Room from "../components/Room";
 import Loader from "../components/Loader";
+import Error  from "../components/Error";
 
 function BookingScreen(match) {
     const [room, setRoom] = useState([]);
@@ -18,9 +19,7 @@ function BookingScreen(match) {
 
             } catch (error) {
                 setloading(false)
-                setloading(true)
-                
-                
+                setloading(true)   
             }
         };
 
