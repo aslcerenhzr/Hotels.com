@@ -11,8 +11,8 @@ function RegisterScreen(){
     const[password, setpassword] = useState('')
 
     const [loading, setloading] = useState(false)
-    const [error, seterror] = useState()
-    const [success, setsuccess] = useState()
+    const [error, seterror] = useState(null)
+    const [success, setsuccess] = useState(false)
 
     async function register(){
         const user={
@@ -23,7 +23,7 @@ function RegisterScreen(){
         
         try {
             setloading(true)
-            const result = await axios.post('/api/users/register', user).data
+            const result = await axios.post('/api/users/register', user)
             setloading(false)
             setsuccess(true)
 
@@ -40,7 +40,7 @@ function RegisterScreen(){
     return(
         <div>
             {loading&&(<Loader/>)}
-            {error&&(<Error/>)}
+            {error&&(<Error message={error}/>)}
            
 
             <div className="row justify-content-center mt-5">

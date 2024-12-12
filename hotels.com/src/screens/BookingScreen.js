@@ -1,19 +1,26 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import Room from "../components/Room";
 import Loader from "../components/Loader";
 import Error  from "../components/Error";
+import moment from "moment";
+
 
 function BookingScreen(match) {
     const [room, setRoom] = useState([]);
     const [loading, setloading] = useState(true)
     const [error, seterror] = useState()
 
+    const fromdate= moment(match.params.fromdate, 'DD-MM-YYYY')
+    const todate = moment(match.params.todate, 'DD-MM-YYYY')
+    
+    const totaldays = moment.duration(todate.diff(fromdate)).asDays;
+    const totalamount = totaldays * room.rent_per_day
+
     useEffect(() => {
         const fetchRooms = async () => {
             try {
                 setloading(true)
-                const response = await axios.get('/api/rooms/getroombyid', {roomid : match.params.roomid});
+                const response = await axios.post('/api/rooms/getroombyid');
                 setRoom(response.data);
                 setloading(false)
 
@@ -42,8 +49,8 @@ function BookingScreen(match) {
                             <hr />
                             <b>
                                 <p>Name: </p>
-                                <p>From Date: </p>
-                                <p>To Date: </p>
+                                <p>From Date: {fromdate}</p>
+                                <p>To Date: {match.params.todate}</p>
                                 <p>Max Count: {room.number_of_guests}</p>
                             </b>
                         </div>
@@ -52,9 +59,9 @@ function BookingScreen(match) {
                             <h1>Amount</h1>
                             <hr />
                             <b>
-                                <p>Total Days: </p>
+                                <p>Total Days: {totaldays}</p>
                                 <p>Rent Per Day: {room.rent_per_day}</p>
-                                <p>Total Amount: </p>
+                                <p>Total Amount: {totalamount}</p>
                             </b>
                         </div>
 
